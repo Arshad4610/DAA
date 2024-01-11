@@ -11,8 +11,10 @@ int coinchange(int* coins,int coinsize,int amount){
         for(int j=coins[i];j<=amount;j++){
             if(v[j]>(1+v[j-coins[i]])){
                 v[j]=1+v[j-coins[i]];
-                printf("%d ",v[j]);
             }
+        }
+        for(int k=1;k<=amount;k++){
+                printf("%d ",v[k]);
         }
         printf("\n");
     }
@@ -31,8 +33,8 @@ int main(){
 }
 OUTPUT:
 1 2 3 4 5 6 7 8 9 10 11 12 13 
-1 2 2 3 3 4 4 5 5 6 6 7 
-1 2 2 3 3 2 3 3 4 
+1 1 2 2 3 3 4 4 5 5 6 6 7 
+1 1 2 2 1 2 2 3 3 2 3 3 4 
 4
 -------------------------------------------------------------------------------------------------------------------------------------------
 #include<stdio.h>
