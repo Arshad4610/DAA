@@ -1,5 +1,42 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<limits.h>
+int coinchange(int* coins,int coinsize,int amount){
+    int v[amount+1];
+    v[0]=0;
+    for(int i=1;i<amount+1;i++){
+        v[i]=INT_MAX;
+    }
+    for(int i=0;i<coinsize;i++){
+        for(int j=coins[i];j<=amount;j++){
+            if(v[j]>(1+v[j-coins[i]])){
+                v[j]=1+v[j-coins[i]];
+                printf("%d ",v[j]);
+            }
+        }
+        printf("\n");
+    }
+    if(v[amount]==INT_MAX){
+        return -1;
+    }
+    else{
+        return v[amount];
+    }
+}
+int main(){
+    int coins[3]={1,2,5};
+    int coinsize=sizeof(coins)/sizeof(coins[0]);
+    int amount=13;
+    printf("%d",coinchange(coins,coinsize,amount));
+}
+OUTPUT:
+1 2 3 4 5 6 7 8 9 10 11 12 13 
+1 2 2 3 3 4 4 5 5 6 6 7 
+1 2 2 3 3 2 3 3 4 
+4
+-------------------------------------------------------------------------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
 int eval(int m,int n){
     if(m==-1 && n==-1){
         return -1;
